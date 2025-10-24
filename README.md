@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Project name: LeaseLink
+Vercel link:
+Repo link: https://github.com/daannncb/lease_link
 
-## Getting Started
+Team members: Maha Naqvi, Callum Everitt, Aren Singh, Daniel Brownsey
 
-First, run the development server:
+Project description:
+A site which both allows you to create a virtual pantry of all the food items in your house and see which recipes you might want to cook using those ingredients.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Problem domain:
+People can't always remember what food items they have in their houses, and coming up with recipe ideas isn't always easy.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+User stories:
+As a user, I want to see a list of the items I have in my pantry.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Wireframe:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+A list of any libraries, frameworks, or packages that your application requires in order to properly function:
+Express.js, pg, cors...
 
-## Learn More
+Instructions on how to run your app:
 
-To learn more about Next.js, take a look at the following resources:
+Lighthouse report:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Reflections:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Please mention the requirements you met and which goals you achieved for this assignment.
 
-## Deploy on Vercel
+🎯 Were there any requirements or goals that you were not quite able to achieve?
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🎯 If so, could you please tell us what was it that you found difficult about these tasks?
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+What went really well and what could have gone better?
+Detailing useful external sources that helped you complete the assignment (e.g Youtube tutorials).
+Describing errors or bugs you encountered while completing your assignment.
+
+References:
+Third-party APIs, CSS resets, icons, images...
+
+---
+
+Brainstorming
+Define core features: profiles, listings, repair tracking, reviews, messaging.
+
+Step 1: Draw Wireframe
+Tools Figma ✅, Trello ✅
+Step 2: Set up database tables using schema
+Tools: drawsql ✅
+Tools: SQL editor on Supabase. Purpose: to create our tables and seed dummy data.
+Step 3: Set up Project & GitHub
+Npx create-next-app@latest
+Project-name
+Typescript : No
+ESlint
+Tailwind CSS: YES
+src/directory: YES
+APP Router: YES
+Turbopack: YES
+Import Alias: No
+Remember: Don’t do git init in here
+Cd project name
+New Repository (no readme)
+Copy paste git remote add origin…..
+Git add .
+Git commit -m “chore: add project template”
+Git push
+Git push -u origin main
+Git ruleset for branching
+Git checkout -b folderName (after writing the codes, git add ., git commit -m “”, git push, git push - u origin folderName )
+Git checkout main
+Merge, review
+Git pull
+Again Git checkout -b folderName …..
+Review, merge
+Code .
+Step 4: Setup Environment Variables
+.env (.gitignore)
+Step 5: Deployment
+Deploy on Vercel — set env variables on Vercel dashboard
+Step 6: Plan Folder Structure ✅
+📂src
+1: 📂 App
+📂 property 📂 [propertyId] - page.js 📂 repairs -page.js
+^ property -> propertyId -> page has list of repairs, click repair -> [repairId] -> page lists a repair with its comments
+📂 Landlord 📂[landlordId] - page.js //”my-profile -> redir${clerk_id}
+📂 Tenants 📂[tenantId] - page.js //”my-profile -> redir${clerk_id}
+📂 comments - 📂 [commentId] - page.js 📂delete - page.js
+📂login 📂 […login] - page.js
+📂logout 📂 […logout] - page.js
+Errors.js
+notFound.js
+Loading.js2:
+
+📂 Components
+Header.jsx —- navigation links (import links from next/links)
+Footer.jsx
+CommentList.jsx
+DeleteButton.jsx
+Form.jsx
+PropertyCard.jsx
+RepairLog.jsx
+ReviewList.jsx
+3: 📂 lib - queries.sql
+4: 📂 utils
+\*dbConnection.js set up our database pool using the pg package (install it, please)
+5: 📂 Middleware - middleware.js
+5: 📂 Images
+Step 7: Setup Backend
+Auth
+Storage bucket
+Supabase
+Step 8: Build Components
+Header & Footer — site navigation and footer
+CommentList — fetch and show comments for communication
+Form — form for name + comment text input or whatever we decide
+Implement delete button on comments
+MassageList - between tenants and landlord
+PropertyCard - display property images, address, repair status
+Step 9: Fetch
+Fetch all the data
+Delete comments by comment id
+(Stretch) Confirm deletion before removing
+
+Step 10: Styling
+Use Tailwind, google fonts
+Simple cards, forms, buttons, spacing
+
+Step 11: Testing
+Test adding comments on individual property
+Test deleting comment
+Confirm navigation works smoothly
+Test Reviews
+Step 12: Reflection
+Step 13: Lighthouse
+
+Step 14: Presentation
+
+MORE FOLDERS AND FILES
+We can add more files
