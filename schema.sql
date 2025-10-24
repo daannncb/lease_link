@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS tenancy_requests (
 SELECT properties.*
 FROM properties
 JOIN roles ON roles.property_id = properties.id
-WHERE roles.landlord_id = :landlordId;
+WHERE roles.landlord_id = $1;
 
 
 
@@ -80,7 +80,7 @@ WHERE roles.landlord_id = :landlordId;
 SELECT users.full_name, users.email
 FROM users
 JOIN roles ON roles.tenant_id = users.id
-WHERE roles.landlord_id = :landlordId;
+WHERE roles.landlord_id = $1;
 
 
 
@@ -88,14 +88,14 @@ WHERE roles.landlord_id = :landlordId;
 SELECT tenancy_requests.*, users.full_name AS tenant_name
 FROM tenancy_requests
 JOIN users ON users.id = tenancy_requests.tenant_id
-WHERE tenancy_requests.property_id = :propertyId;
+WHERE tenancy_requests.property_id = $1;
 
 
 
 
 SELECT repairs.*
 FROM repairs
-WHERE repairs.property_id = :propertyId;
+WHERE repairs.property_id = $1;
 
 
 
@@ -103,7 +103,7 @@ WHERE repairs.property_id = :propertyId;
 SELECT repairs.*
 FROM repairs
 JOIN roles ON roles.id = repairs.role_id
-WHERE roles.landlord_id = :landlordId;
+WHERE roles.landlord_id = $1;
 
 
 
@@ -111,7 +111,7 @@ WHERE roles.landlord_id = :landlordId;
 SELECT comments.comment, users.full_name, comments.created_at
 FROM comments
 JOIN users ON users.id = comments.user_id
-WHERE comments.repair_id = :repairId
+WHERE comments.repair_id = $1
 ORDER BY comments.created_at ASC;
 
 
@@ -121,7 +121,7 @@ SELECT feedback.comment, feedback.voting, users.full_name AS tenant_name
 FROM feedback
 JOIN roles ON roles.id = feedback.role_id
 JOIN users ON users.id = roles.tenant_id
-WHERE roles.landlord_id = :landlordId;
+WHERE roles.landlord_id = $1;
 
 
 
@@ -136,7 +136,7 @@ JOIN roles ON roles.id = repairs.role_id
 JOIN users AS landlords ON landlords.id = roles.landlord_id
 JOIN users AS tenants ON tenants.id = roles.tenant_id
 JOIN properties ON properties.id = roles.property_id
-WHERE repairs.id = :repairId;
+WHERE repairs.id = $1;
 
 
 SELECT
@@ -149,7 +149,7 @@ SELECT
 FROM properties
 LEFT JOIN roles
  ON roles.property_id = properties.id
-WHERE roles.landlord_id = :landlordId;
+WHERE roles.landlord_id = $1;
 
 
 
@@ -161,7 +161,7 @@ SELECT
 FROM users
 LEFT JOIN roles
  ON roles.tenant_id = users.id
-WHERE roles.landlord_id = :landlordId;
+WHERE roles.landlord_id = $1;
 
 
 
@@ -174,7 +174,7 @@ SELECT
 FROM tenancy_requests
 LEFT JOIN users
  ON users.id = tenancy_requests.tenant_id
-WHERE tenancy_requests.property_id = :propertyId;
+WHERE tenancy_requests.property_id = $1;
 
 
 
@@ -188,7 +188,7 @@ SELECT
 FROM repairs
 LEFT JOIN properties
  ON properties.id = repairs.property_id
-WHERE repairs.property_id = :propertyId;
+WHERE repairs.property_id = $1;
 
 
 
@@ -201,7 +201,7 @@ SELECT
 FROM repairs
 LEFT JOIN roles
  ON roles.id = repairs.role_id
-WHERE roles.landlord_id = :landlordId;
+WHERE roles.landlord_id = $1;
 
 
 
@@ -213,7 +213,7 @@ SELECT
 FROM comments
 LEFT JOIN users
  ON users.id = comments.user_id
-WHERE comments.repair_id = :repairId
+WHERE comments.repair_id = $1
 ORDER BY comments.created_at ASC;
 
 
@@ -228,7 +228,7 @@ LEFT JOIN roles
  ON roles.id = feedback.role_id
 LEFT JOIN users
  ON users.id = roles.tenant_id
-WHERE roles.landlord_id = :landlordId;
+WHERE roles.landlord_id = $1;
 
 
 
@@ -250,4 +250,4 @@ LEFT JOIN users AS tenants
  ON tenants.id = roles.tenant_id
 LEFT JOIN properties
  ON properties.id = roles.property_id
-WHERE repairs.id = :repairId;
+WHERE repairs.id = $1;
