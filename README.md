@@ -1,11 +1,11 @@
-## Project name: LeaseLink
+# 🏠 LeaseLink
 
 - 🌐 Vercel link:
 - Repo link: https://github.com/daannncb/lease_link
 
 ---
 
-## 👬👫Collaborators:
+## 👬👫 Collaborators: 
 
 - Mah Para Naqvi 🌟
 - Callum Everitt 🌟
@@ -14,7 +14,7 @@
 
 ---
 
-## Project Description:
+## 📝 Project Description:
 
 This project is about a platform where landlord and tenants communicate efficiently about property repairs and feedback for credibility.
 
@@ -22,17 +22,17 @@ This project is about a platform where landlord and tenants communicate efficien
 
 #### User Stories:
 
-- 🎯Log-in & Sign-Up (Both) - As a tenant/landlord, I want to be able to sign up/log in with my email address/social
+- 🎯 Log-in & Sign-Up (Both) -   As a tenant/landlord, I want to be able to sign up/log in with my email address/social
 
-- 🎯Navigation (Both) - As a tenant, I want a clear navigation menu that shows all available features, so that I can easily find what I need without getting lost.
+- 🎯 Navigation (Both) - As a tenant, I want a clear navigation menu that shows all available features, so that I can easily find what I need without getting lost.
 
 - As a landlord, I want a navigation menu organised by my main tasks, so that I can quickly access properties, tickets, and tenant information.
 
-- 🎯Direct Communication (Both) - As a tenant or landlord, I want to comment directly on specific tickets, so that all communication about an issue stays organized in one thread rather than scattered across texts, emails, and calls.
+- 🎯 Direct Communication (Both) -   As a tenant or landlord, I want to comment directly on specific tickets, so that all communication about an issue stays organized in one thread rather than scattered across texts, emails, and calls.
 
 - 🎯 Ticket Submission - Tenant - As a tenant, I want to create and submit maintenance tickets with photos and descriptions, so that my landlord can understand the issue clearly without back-and-forth messages.
 
-- 🎯Photo Upload (Tenant) - As a tenant, I want to be able to upload an image when submitting a ticket so the Landlord can see the exact problem without the need to visit
+- 🎯 Photo Upload (Tenant) -  As a tenant, I want to be able to upload an image when submitting a ticket so the Landlord can see the exact problem without the need to visit
 
 - 🎯 Ticket Management & Response (Landlord) - As a landlord, I want to view all open tickets from my tenants in one dashboard and provide estimated resolution timelines, so that I can manage expectations and prioritize repairs efficiently.
 
@@ -50,7 +50,7 @@ This project is a full-stack web application built with Next.js (React framework
 
 ---
 
-## Technical Requirements
+## 🎯 Technical Requirements
 
 - The application must include multiple pages and dynamic routes.
 - Use Express.js to set up the server and define API endpoints for a React application, or use Next.js for server-side rendering and database integration.
@@ -100,9 +100,9 @@ Tools Figma ✅, Trello ✅
 - Git push
 - Git push -u origin main
 - Set up Git collaborators and ruleset for branching
-- > > Github- setting- send request for collaboration
-- > > github- setting - Ruleset - new branch ruleset - name ruleset - target branch - default - in Branch Rules: ✅ restrict deletion ✅ require a pull request before merging ✅ block force pushes - save changes
-- Git checkout -b folderName (after writing the codes, git add ., git commit -m “”, git push, git push - u origin folderName )
+- >>Github- setting- send request for collaboration
+- >>github- setting - Ruleset - new branch ruleset - name ruleset - target branch - default - in Branch Rules: ✅ restrict deletion ✅ require a pull request before merging ✅ block force pushes - save changes
+- Git checkout -b folderName (after writing the codes,➡️ git add .➡️ git commit -m “”,➡️ git push, ➡️ git push ➡️- git push --set-upstream origin docs )
 - Git checkout main
 - Merge, review
 - Git pull
@@ -127,8 +127,8 @@ Tools Figma ✅, Trello ✅
 - 📂 Landlord 📂[landlordId] - page.js
 - 📂 Tenants 📂[tenantId] - page.js
 - 📂 comments - 📂 [commentId] - page.js 📂delete - page.js
-- 📂login 📂 […login] - page.js
-- 📂logout 📂 […logout] - page.js
+- 📂login 📂 [[…login]]  - page.js
+- 📂logout 📂 [[…logout]]  - page.js
 - 📂api - 📂uploads
 - Errors.js
 - notFound.js
@@ -192,16 +192,43 @@ Tools Figma ✅, Trello ✅
 
 #### Step 12: Reflection ✅
 
----
-
 #### Step 13: Lighthouse
-
----
 
 #### Step 14: Presentation
 
 - MORE FOLDERS AND FILES
   We can add more files
+
+---
+
+## Install and Set Up Clerk Authentication ✅
+
+- Install Clerk
+- npm install @clerk/nextjs
+- Connect Clerk to App
+- Go to Clerk Dashboard → Application → API Keys
+- Create .env file and add:NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=...
+- CLERK_SECRET_KEY=...
+- Step 6: Set Up Clerk Middleware ✅
+- Create middleware.ts in /src
+- Setup public vs protected routes ✅
+
+#### Set Up ClerkProvider ✅
+
+- In root layout.js, 
+- wrap app: `<ClerkProvider>` `<html lang="en">` `<body className={font}>` `<Header />` `{children}` `</body></html>` `</ClerkProvider>`
+
+#### Set Up Custom Sign-in / Sign-up Routes
+
+- Create: /app/sign-in/[[...sign-in]]/page.js /app/sign-up/[[...sign-up]]/page.js
+- Use: import { SignIn, SignUp } from "@clerk/nextjs";
+- Redirect to Custom Routes In .env add:
+- NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up 
+- NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL=/ 
+- NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL=/ Add Clerk UI Components
+- Customise as needed
+- Test with demo users (email/phone) Access User ID Use:
+- import { auth } from "@clerk/nextjs"; const { userId } = auth(); I can store userId to build relationships in my DB
 
 ---
 
