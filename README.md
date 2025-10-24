@@ -8,7 +8,7 @@
 ## 👬👫 Collaborators: 
 
 - Mah Para Naqvi 🌟
--  Callum Everitt 🌟
+- Callum Everitt 🌟
 - Aren Singh 🌟
 - Daniel Brownsey 🌟
 
@@ -18,9 +18,7 @@
 
 This project is about a platform where landlord and tenants communicate efficiently about property repairs and feedback for credibility.
 
-
 #### Problem domain:
-
 
 #### User Stories:
 
@@ -32,7 +30,7 @@ This project is about a platform where landlord and tenants communicate efficien
 
 - 🎯 Direct Communication (Both) -   As a tenant or landlord, I want to comment directly on specific tickets, so that all communication about an issue stays organized in one thread rather than scattered across texts, emails, and calls.
 
-- 🎯 Ticket Submission - Tenant -  As a tenant, I want to create and submit maintenance tickets with photos and descriptions, so that my landlord can understand the issue clearly without back-and-forth messages.
+- 🎯 Ticket Submission - Tenant - As a tenant, I want to create and submit maintenance tickets with photos and descriptions, so that my landlord can understand the issue clearly without back-and-forth messages.
 
 - 🎯 Photo Upload (Tenant) -  As a tenant, I want to be able to upload an image when submitting a ticket so the Landlord can see the exact problem without the need to visit
 
@@ -94,6 +92,7 @@ Tools Figma ✅, Trello ✅
 - Cd project name
 - npm i
 - npm pg
+- npm i @clerk/nextjs
 - New Repository (no readme)
 - Copy paste git remote add origin…..
 - Git add .
@@ -111,7 +110,6 @@ Tools Figma ✅, Trello ✅
 - Review, merge
 - Code .
 
-
 #### Step 4: Setup Environment Variables
 
 - .env (.gitignore)
@@ -122,20 +120,19 @@ Tools Figma ✅, Trello ✅
 
 #### Step 6: Plan Folder Structure ✅
 
-
 - **📂src**
-- *1: 📂 App*
+- _1: 📂 App_
 
 - 📂 property 📂 [propertyId] - page.js 📂 repairs -page.js 📂[repairId] -page.js
 - 📂 Landlord 📂[landlordId] - page.js
-- 📂 Tenants 📂[tenantId] - page.js 
+- 📂 Tenants 📂[tenantId] - page.js
 - 📂 comments - 📂 [commentId] - page.js 📂delete - page.js
 - 📂login 📂 [[…login]]  - page.js
 - 📂logout 📂 [[…logout]]  - page.js
 - 📂api - 📂uploads
 - Errors.js
 - notFound.js
-- Loading.js 
+- Loading.js
 
 - **📂 Components**
 
@@ -152,12 +149,11 @@ Tools Figma ✅, Trello ✅
 
 - **4: 📂 utils**
 
-- *dbConnection.js set up our database pool using the pg package (install it, please)
+- \*dbConnection.js set up our database pool using the pg package (install it, please)
 
 **5: 📂 Middleware** - middleware.js
 
 **6: 📂 Images**
-
 
 #### Step 7: Setup Backend
 
@@ -201,7 +197,7 @@ Tools Figma ✅, Trello ✅
 #### Step 14: Presentation
 
 - MORE FOLDERS AND FILES
-We can add more files
+  We can add more files
 
 ---
 
@@ -253,6 +249,7 @@ We can add more files
 ---
 
 ## 📘 Resources
+
 - [PostgreSQL](https://neon.com/postgresql/postgresql-tutorial/postgresql-boolean)
 - [PostgreSQL](https://leapcell.medium.com/14-rules-for-designing-mysql-tables-de03565305a2)
 - []()
