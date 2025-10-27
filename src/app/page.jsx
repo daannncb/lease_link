@@ -1,4 +1,4 @@
-import { db } from "@/utils/dbCoection";
+import { db } from "@/utils/dbConnection";
 import { SignInButton, SignOutButton } from "@clerk/nextjs";
 
 export default async function HomePage() {
