@@ -1,7 +1,9 @@
-import { Resend } from "resend";
+"use server";
+// import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { getLandlordByRoleId } from "@/app/actions/landlord";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendRepairNotificationEmail({
   roleId,
@@ -14,13 +16,31 @@ export async function sendRepairNotificationEmail({
 
   if (!landlord) throw new Error("Landlord not found");
 
-  await resend.emails.send({
-    from: "onboarding@resend.dev",
-    to: landlord.email,
-    subject: `New Repair Request from ${tenantName}`,
-    html: `<p>Hello ${landlord.full_name},</p>
-            <p>${tenantName} submitted a new repair for property: ${propertyAddress}</p>
-            <p>Description: ${repairDescription}</p>`,
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD,
+    },
   });
-  console.log("email sent?!");
+
+  // email details
+    const mailOptions = {
+    from: process.env.GMAIL_USER, 
+    to: landlord.email,           // recipient (landlord)
+    subject: `New Repair Request from ${tenantName}`,
+    html: `
+      <p>Hi <strong>${landlord.full_name}</strong>,</p>
+      <p><strong>${tenantName}</strong> submitted a new repair request for:</p>
+      <p><em>${propertyAddress}</em></p>
+      <p><strong>Description:</strong> ${repairDescription}</p>
+      <p>Thank you,<br/>The LeaseLink App</p>
+    `,
+  };
+
+  // send email
+  const info = await transporter.sendMail(mailOptions);
+  console.log("Email sent successfully:", info.response);
+
+  return { success: true };
 }
