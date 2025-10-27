@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import { getLandlordByRoleId } from "@/app/actions/landlord";
 
-const resend = new Resend(`${process.env.RESEND_API_KEY}`);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendRepairNotificationEmail({
   roleId,
@@ -15,7 +15,7 @@ export async function sendRepairNotificationEmail({
   if (!landlord) throw new Error("Landlord not found");
 
   await resend.emails.send({
-    from: "noreply@resend.com",
+    from: "onboarding@resend.dev",
     to: landlord.email,
     subject: `New Repair Request from ${tenantName}`,
     html: `<p>Hello ${landlord.full_name},</p>
