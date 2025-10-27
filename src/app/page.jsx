@@ -1,4 +1,5 @@
 import { db } from "../../dbConnection";
+import { SignInButton, SignOutButton } from "@clerk/nextjs";
 
 export default async function HomePage() {
   const res = await db.query(`SELECT * FROM properties`);
@@ -7,6 +8,8 @@ export default async function HomePage() {
   console.log(data);
   return (
     <div>
+      <SignInButton />
+      <SignOutButton />
       <p>Welcome to LeaseLink!</p>
       <p>Dan&apos;s House is in:</p>
       {data.map((datum) => {
