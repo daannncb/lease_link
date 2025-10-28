@@ -5,7 +5,7 @@ import { useRef, useState, useTransition } from "react";
 import { uploadImage } from "../supabase/storage/storage";
 import { convertBlobUrlToFile } from "./utils/utils";
 
-export default function HomePage() {
+export default function ImagePage() {
   const [imageUrls, setImageUrls] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
   const [isPending, startTransition] = useTransition();
