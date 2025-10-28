@@ -1,0 +1,33 @@
+import { v4 as uuidv4 } from "uuid";
+import imageCompression from "browser-image-compression";
+import { createSupabaseClient } from "../supabase/supabase";
+
+function getStorage() {
+  const supabase = createSupabaseClient();
+  return supabase.storage;
+}
+
+export async function uploadImage({ file, bucket, folder }) {
+  const fileName = file.name;
+  const fileExtension = fileName.slice(fileName.lastIndexOf(".") + 1);
+  const path = `${folder ? folder + "/" : ""}${uuidv4()}.${fileExtension}`;
+
+  try {
+    file = await imageCompression(file, {
+      maxSizeMB: 1,
+    });
+  } catch (error) {
+    console.error(error);
+    return { imageUrl: "", error: "Image compression failed" };
+  }
+
+  const storage = getStorage();
+
+  const { data, error } = await storage.from(bucket).upload(path, file);
+  if (error) {
+    return { imageUrl: "", error: error.message };
+  }
+
+  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucket}/${data?.path}`;
+  return { imageUrl, error: null };
+}
