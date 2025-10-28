@@ -1,8 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-body {
-  background-color: #5b6964;
-  color: #ffecbd;
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --color-sage-green: #5F6B66;
+  --color-beige: #F5F1E9;
 }
+
+
