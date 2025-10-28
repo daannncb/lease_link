@@ -1,19 +1,16 @@
-import { db } from "@/utils/dbConnection";
 import { SignInButton, SignOutButton } from "@clerk/nextjs";
-import "./globals.css";
+import ThemedSection from "@/components/ThemedSection";
 
 export default async function HomePage() {
   return (
-    <div>
-      <p className="h-screen bg-gradient-to-br from-green-800 via-green-600 to-green-300">
-        Welcome to LeaseLink!
-      </p>
+    <ThemedSection className="flex flex-col items-center justify-center min-h-screen p-6">
+      <h1 className="text-4xl font-bold mb-6">Welcome to LeaseLink!</h1>
       <div className="home-page-container">
-        <div className="home-page-signs">
+        <div className="home-page-signs flex gap-4">
           <SignInButton />
           <SignOutButton />
         </div>
       </div>
-    </div>
+    </ThemedSection>
   );
 }
