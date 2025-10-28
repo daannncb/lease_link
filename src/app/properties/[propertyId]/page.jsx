@@ -2,6 +2,7 @@ import RepairForm from "@/components/repairForm";
 import { db } from "@/utils/dbConnection";
 import GetRepairsListLandlord from "@/components/GetRepairsListLandlord";
 import PropertyView from "@/components/PropertyView";
+import GetRepairsListProperties from "@/components/GetRepairListProperties";
 
 export default async function PropertyPage({ params }) {
   const propertyId = (await params).propertyId;
@@ -14,7 +15,6 @@ export default async function PropertyPage({ params }) {
     `SELECT users.full_name, properties.address_line1, properties.address_line2, properties.city, properties.postcode FROM users JOIN roles ON users.id = roles.tenant_id JOIN properties ON roles.property_id = properties.id WHERE roles.property_id = ${propertyId} AND tenant_id IS NOT NULL`
   );
   const tenantData = res2.rows[0];
-  // console.log(tenantData);
   const tenantName = tenantData.full_name;
   console.log(tenantData);
   const propertyAddress = `
@@ -33,7 +33,7 @@ export default async function PropertyPage({ params }) {
       <div>
         <h1>PROPERTY VIEW:</h1>
         <PropertyView propertyId={propertyId} />
-
+        <GetRepairsListProperties propertyId={propertyId} />
         <h1>ADD NEW REPAIR:</h1>
         <RepairForm
           roleId={roleId}
@@ -42,7 +42,7 @@ export default async function PropertyPage({ params }) {
         />
       </div>
       <div>
-        <GetRepairsListLandlord propertyId={propertyId} />
+        {/* <GetRepairsListLandlord propertyId={propertyId} /> */}
         {/* This list needs some formatting, and the query looking at. Just added to see whats up with this */}
       </div>
     </>
