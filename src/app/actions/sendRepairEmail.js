@@ -12,7 +12,7 @@ export async function sendRepairNotificationEmail({
   repairDescription,
 }) {
   const landlord = await getLandlordByRoleId(roleId);
-  console.log("LANDLORD EMAIL EMAIL:", landlord);
+  // console.log("LANDLORD EMAIL EMAIL:", landlord);
 
   if (!landlord) throw new Error("Landlord not found");
 
@@ -25,9 +25,9 @@ export async function sendRepairNotificationEmail({
   });
 
   // email details
-    const mailOptions = {
-    from: process.env.GMAIL_USER, 
-    to: landlord.email,           // recipient (landlord)
+  const mailOptions = {
+    from: process.env.GMAIL_USER,
+    to: landlord.email, // recipient (landlord)
     subject: `New Repair Request from ${tenantName}`,
     html: `
       <p>Hi <strong>${landlord.full_name}</strong>,</p>

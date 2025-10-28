@@ -15,7 +15,7 @@ LEFT JOIN roles
  ON roles.property_id = properties.id
 WHERE roles.landlord_id = 2 AND properties.id = ${propertyId};`);
   const properties = res.rows;
-  console.log(properties);
+  // console.log(properties);
 
   return (
     <div>
