@@ -1,9 +1,8 @@
 //! property view page for landlords - multiple properties rendered if landlord has multiple
 //! not finished
+import { db } from "@/utils/dbConnection";
 
-export default async function PropertyPage({ params }) {
-  const propertyId = (await params).propertyId;
-
+export default async function GetRepairsListLandlord({ propertyId }) {
   const res = await db.query(`SELECT
  properties.id,
  properties.address_line1,
@@ -14,8 +13,9 @@ export default async function PropertyPage({ params }) {
 FROM properties
 LEFT JOIN roles
  ON roles.property_id = properties.id
-WHERE roles.landlord_id = 2;`);
+WHERE roles.landlord_id = 2 AND properties.id = ${propertyId};`);
   const properties = res.rows;
+  console.log(properties);
 
   return (
     <div>
