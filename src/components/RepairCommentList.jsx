@@ -13,7 +13,7 @@ export default function RepairCommentList({ comments, repairId, deleteAction }) 
           className="bg-white border border-gray-300 rounded p-4 flex justify-between items-center"
         >
           <div>
-            <p className="text-gray-800">{comment.message}</p>
+            <p className="text-gray-800">{comment.comment}</p>
             <small className="text-gray-500">
               {new Date(comment.created_at).toLocaleDateString()}
             </small>
