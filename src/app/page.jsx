@@ -1,7 +1,7 @@
 import { SignInButton, SignOutButton } from "@clerk/nextjs";
 import ThemedSection from "@/components/ThemedSection";
 
-export default async function HomePage() {
+export default function HomePage() {
   return (
     <ThemedSection className="flex flex-col items-center justify-center min-h-screen p-6">
       <h1 className="text-4xl font-bold mb-6">Welcome to LeaseLink!</h1>
