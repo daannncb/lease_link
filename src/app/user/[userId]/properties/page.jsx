@@ -1,5 +1,6 @@
 //! dynamic route to display for landlords' properties
 //* property cards link to /properties/[propertyId]
+//* also for landlords, an add property component
 
 export default function LandlordPropertiesView() {
   //select query to get value of roles table

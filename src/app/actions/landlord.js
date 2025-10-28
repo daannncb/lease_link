@@ -9,7 +9,5 @@ export async function getLandlordByRoleId(roleId) {
      WHERE roles.id = $1`,
     [roleId]
   );
-  // console.log("landlord email query:", res);
-  // console.log("landlord email query:: email :", res.rows[0].email);
   return res.rows[0];
 }

@@ -1,9 +1,6 @@
 "use server";
-// import { Resend } from "resend";
 import nodemailer from "nodemailer";
 import { getLandlordByRoleId } from "@/app/actions/landlord";
-
-// const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendRepairNotificationEmail({
   roleId,
@@ -12,7 +9,6 @@ export async function sendRepairNotificationEmail({
   repairDescription,
 }) {
   const landlord = await getLandlordByRoleId(roleId);
-  // console.log("LANDLORD EMAIL EMAIL:", landlord);
 
   if (!landlord) throw new Error("Landlord not found");
 
