@@ -3,8 +3,18 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --color-sage-green: #5F6B66;
-  --color-beige: #F5F1E9;
+  --color-sage-green: #5f6b66;
+  --color-beige: #f5f1e9;
 }
 
+.home-page-container {
+  display: flex;
+  flex-direction: row;
+}
 
+.home-page-signs {
+  display: flex;
+  justify-content: space-around;
+  width: 30vw;
+  height: 50vh;
+}
