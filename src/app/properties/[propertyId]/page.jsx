@@ -1,5 +1,6 @@
 import RepairForm from "@/components/repairForm";
 import { db } from "@/utils/dbConnection";
+import GetRepairsListLandlord from "@/components/GetRepairsListLandlord";
 
 export default async function PropertyPage({ params }) {
   const propertyId = (await params).propertyId;
@@ -17,9 +18,15 @@ export default async function PropertyPage({ params }) {
   console.log(roleId);
   // if (clerk user = tenant id/landlord id)
   return (
-    <div>
-      <p>Protected Page</p>
-      <RepairForm roleId={roleId} />
-    </div>
+    <>
+      <div>
+        <p>Protected Page</p>
+        <RepairForm roleId={roleId} />
+      </div>
+      <div>
+        <GetRepairsListLandlord propertyId={propertyId} />
+        {/* This list needs some formatting, and the query looking at. Just added to see whats up with this */}
+      </div>
+    </>
   );
 }
