@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState, useTransition } from "react";
-import { uploadImage } from "./supabase/storage/storage";
+import { uploadImage } from "../supabase/storage/storage";
 import { convertBlobUrlToFile } from "./utils/utils";
 
 export default function HomePage() {
@@ -28,7 +28,7 @@ export default function HomePage() {
         try {
           const { imageUrl, error } = await uploadImage({
             file,
-            bucket: "dank-pics",
+            bucket: "HugeBarginBucket",
             folder: "uploads",
           });
 
