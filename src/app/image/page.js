@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef, useState, useTransition } from "react";
 import { uploadImage } from "../supabase/storage/storage";
-import { convertBlobUrlToFile } from "./utils/utils";
+import { convertBlobUrlToFile } from "@/utils/blob";
 
 export default function ImagePage() {
   const [imageUrls, setImageUrls] = useState([]);
