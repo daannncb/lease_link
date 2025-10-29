@@ -1,0 +1,31 @@
+import { db } from "@/utils/dbConnection";
+
+export default async function FeedbackPage({ params }) {
+  const propertyId = (await params).propertyId;
+
+  const res = await db.query(
+    `SELECT * FROM feedback JOIN roles on feedback.role_id = roles.id WHERE roles.id = (SELECT id FROM roles WHERE roles.property_id = $1 AND roles.landlord_id IS NOT NULL)`,
+    [propertyId]
+  );
+  const feedbackData = res.rows;
+  console.log(feedbackData);
+
+  //   FROM properties
+  //     LEFT JOIN roles ON roles.property_id = properties.id
+  //     WHERE roles.landlord_id = (
+  //       SELECT id FROM users WHERE clerk_id = $1
+  //     )
+
+  return (
+    <div>
+      <h1>hello</h1>
+      {feedbackData.map((feedback) => {
+        return (
+          <div key={feedback.id}>
+            <p>{feedback.comment}</p>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
