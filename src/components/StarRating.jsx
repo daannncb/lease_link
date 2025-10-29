@@ -13,24 +13,36 @@ export default function StarRating({ maxStars = 5, onRatingSelect, defaultRating
     };
 
     return (
-    <div className="flex gap-1">
-        {[...Array(maxStars)].map((_, i) => {
-        const value = i + 1;
-        return (
-            <FaStar
-            key={value}
-            size={28}
-            className={`cursor-pointer transition-transform duration-200 ${
-                value <= (hover || rating)
-                ? "text-yellow-400 scale-110"
-                : "text-gray-300"
-            }`}
-            onClick={() => handleClick(value)}
-            onMouseEnter={() => setHover(value)}
-            onMouseLeave={() => setHover(0)}
-            />
-        );
-        })}
-    </div>
+   <div
+  className="flex gap-1 justify-center"
+  aria-label="Select a star rating"
+>
+  {[...Array(maxStars)].map((_, i) => {
+    const value = i + 1;
+    const isActive = value <= (hover || rating);
+
+    return (
+        <span
+        key={value}
+        role="button"                
+        tabIndex={0}                   // make it focusable
+        aria-pressed={isActive}        // screen reader says “pressed” when selected
+        onClick={() => handleClick(value)}
+        onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") handleClick(value);
+        }}
+        onMouseEnter={() => setHover(value)}
+        onMouseLeave={() => setHover(0)}
+        className={`cursor-pointer transition-transform duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-green ${
+            isActive ? "text-yellow-400 scale-110" : "text-gray-300"
+        }`}
+        aria-label={`${value} star${value > 1 ? "s" : ""}`}
+        >
+        <FaStar size={28} />
+        </span>
+    );
+    })}
+</div>
+
     );
 }

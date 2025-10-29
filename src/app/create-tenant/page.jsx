@@ -26,7 +26,9 @@ export default async function CreateProfile() {
       <fieldset>
         <form action={handleSubmit}>
           <div>
-            <label name="property-id">Select a property:</label>
+          <label htmlFor="property-select" className="block mb-2 font-medium">
+          Select a property:
+          </label>
             <select name="properties" id="property-select">
               <option value="">------------------</option>
               {properties.map((property) => {

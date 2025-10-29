@@ -27,20 +27,20 @@ export default function HomePage() {
             >
               Welcome to <span className={theme.text}>LeaseLink!</span>
             </h1>
-            <p className={`text-lg md:text-xl ${theme.text} drop-shadow-md`}>
+            <h2 className={`text-lg md:text-xl ${theme.text} drop-shadow-md`}>
               Seamless communication for landlords and tenants.
-            </p>
+            </h2>
 
             <div className="flex flex-col gap-4 md:flex-row">
               <SignInButton>
-                <button
+                <button aria-label="Sign in to LeaseLink"
                   className={`px-6 py-3 ${theme.headerFooterBg} ${theme.headerFooterText} font-medium rounded-lg shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer`}
                 >
                   Sign In
                 </button>
               </SignInButton>
               <Link href="/sign-up">
-                <button
+                <button aria-label="Sign up to LeaseLink"
                   className={`px-6 py-3 ${theme.headerFooterBg} ${theme.headerFooterText} font-medium rounded-lg shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer`}
                 >
                   Sign Up
@@ -78,11 +78,11 @@ export default function HomePage() {
       </div>
 
       <div className="w-full max-w-7xl mx-auto mt-12 text-center">
-        <p
+        <h3
           className={`text-lg md:text-4xl font-semibold ${theme.text} drop-shadow-md opacity-90`}
         >
           One App. Every Issue. No Hassle
-        </p>
+        </h3>
       </div>
     </ThemedSection>
   );
