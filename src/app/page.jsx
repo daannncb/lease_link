@@ -75,6 +75,12 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      <div className="w-full max-w-7xl mx-auto mt-12 text-center">
+  <p className={`text-lg md:text-4xl font-semibold ${theme.text} drop-shadow-md opacity-90`}>
+    One App.   Every Issue.   No Hassle
+  </p>
+</div>
     </ThemedSection>
   );
 }
