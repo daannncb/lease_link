@@ -33,14 +33,14 @@ export default function HomePage() {
             <div className="flex flex-col gap-4 md:flex-row">
               <SignInButton>
                 <button
-                  className={`px-6 py-3 ${theme.headerFooterBg} ${theme.headerFooterText} font-medium rounded-lg shadow-lg hover:shadow-2xl transition duration-300`}
+                  className={`px-6 py-3 ${theme.headerFooterBg} ${theme.headerFooterText} font-medium rounded-lg shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer`}
                 >
                   Sign In
                 </button>
               </SignInButton>
               <SignUpButton>
                 <button
-                  className={`px-6 py-3 ${theme.headerFooterBg} ${theme.headerFooterText} font-medium rounded-lg shadow-lg hover:shadow-2xl transition duration-300`}
+                  className={`px-6 py-3 ${theme.headerFooterBg} ${theme.headerFooterText} font-medium rounded-lg shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer`}
                 >
                   Sign Up
                 </button>
