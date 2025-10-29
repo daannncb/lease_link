@@ -5,12 +5,28 @@ import Footer from '../components/Footer';
 import ReducerTheme from "@/components/reducerTheme";
 
 export const metadata = {
-  title: 'LeaseLink',
-  description: 'One App. Every Issue. No Hassle',
-  icons: {
-    icon: '/logo.png',
+  title: "LeaseLink, One App. Every Issue. No Hassle",
+  description:
+    "Manage properties, connect with tenants, track repairs, and simplify renting with LeaseLink.",
+  openGraph: {
+    title: "LeaseLink, One App. Every Issue. No Hassle",
+    description:
+      "Manage properties, tenants, repairs, and feedback efficiently.",
+    url: "https://lease-link-nu.vercel.app/",
+    images: [
+      {
+        url: "/homes.jpeg", 
+        width: 1200,
+        height: 630,
+        alt: "LeaseLink, resolves every issue",
+      },
+    ],
   },
-}
+  icons: {
+    icon: "/logo.png", 
+  },
+};
+
 
 
 export default function RootLayout({ children }) {
