@@ -4,6 +4,7 @@ import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import ThemedSection from "@/components/ThemedSection";
 import Image from "next/image";
 import { useTheme } from "@/components/reducerTheme";
+import Link from "next/link";
 
 export default function HomePage() {
   const { theme } = useTheme();
@@ -38,13 +39,13 @@ export default function HomePage() {
                   Sign In
                 </button>
               </SignInButton>
-              <SignUpButton>
+              <Link href="/sign-up">
                 <button
                   className={`px-6 py-3 ${theme.headerFooterBg} ${theme.headerFooterText} font-medium rounded-lg shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer`}
                 >
                   Sign Up
                 </button>
-              </SignUpButton>
+              </Link>
             </div>
           </div>
         </div>
@@ -77,10 +78,12 @@ export default function HomePage() {
       </div>
 
       <div className="w-full max-w-7xl mx-auto mt-12 text-center">
-  <p className={`text-lg md:text-4xl font-semibold ${theme.text} drop-shadow-md opacity-90`}>
-    One App.   Every Issue.   No Hassle
-  </p>
-</div>
+        <p
+          className={`text-lg md:text-4xl font-semibold ${theme.text} drop-shadow-md opacity-90`}
+        >
+          One App. Every Issue. No Hassle
+        </p>
+      </div>
     </ThemedSection>
   );
 }
