@@ -5,6 +5,14 @@ import PropertyView from "@/components/PropertyView";
 import GetRepairsListProperties from "@/components/GetRepairListProperties";
 import ImagePage from "@/components/ImageUploader";
 
+
+export const metadata = {
+  title: "Property Details – LeaseLink",
+  description: "View property details, repairs, and submit new repair requests.",
+  icons: { icon: "/logo.png" },
+};
+
+
 export default async function PropertyPage({ params }) {
   const propertyId = (await params).propertyId;
   //get landlord id from roles table to pass as a param
