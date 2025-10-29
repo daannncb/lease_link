@@ -1,3 +1,5 @@
+
+
 export default function PropertyCard({ property }) {
   return (
     <div className="bg-white border border-gray-300 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow">

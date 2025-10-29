@@ -2,10 +2,11 @@
 
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, EffectFlip } from 'swiper/modules';
 import PropertyCard from './PropertyCard';
 
 import 'swiper/css';
+import 'swiper/css/effect-flip'
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
@@ -16,7 +17,8 @@ export default function PropertiesCarousel({ properties }) {
 
   return (
     <Swiper
-      modules={[Navigation, Pagination]}
+      modules={[Navigation, Pagination, EffectFlip]}
+      effect={'flip'}
       spaceBetween={30}
       slidesPerView={1}
       navigation
