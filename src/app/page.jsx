@@ -40,7 +40,7 @@ export default function HomePage() {
                 </button>
               </SignInButton>
               <Link href="/sign-up">
-                <button aria-label="Sign up to LeaseLink"
+                <button
                   className={`px-6 py-3 ${theme.headerFooterBg} ${theme.headerFooterText} font-medium rounded-lg shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer`}
                 >
                   Sign Up
@@ -72,17 +72,20 @@ export default function HomePage() {
               width={850}
               height={600}
               className="object-cover w-full h-full rounded-3xl"
+              loading="lazy"
             />
           </div>
         </div>
       </div>
 
       <div className="w-full max-w-7xl mx-auto mt-12 text-center">
+        <div className="inline-block p-8 rounded-3xl bg-white/30 dark:bg-slate-800/30 backdrop-blur-lg border border-white/20 dark:border-slate-700/40 shadow-lg">
         <h3
           className={`text-lg md:text-4xl font-semibold ${theme.text} drop-shadow-md opacity-90`}
         >
           One App. Every Issue. No Hassle
         </h3>
+      </div>
       </div>
     </ThemedSection>
   );
