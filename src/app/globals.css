@@ -17,3 +17,9 @@
   width: 30vw;
   height: 50vh;
 }
+
+/* navigating with Tab */
+:focus-visible {
+  outline: 3px solid var(--color-sage-green);
+  outline-offset: 2px;
+}

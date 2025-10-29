@@ -25,6 +25,7 @@ export default function RepairForm({ roleId, propertyAddress, tenantName }) {
 
   return (
     <form onSubmit={handleSubmit}>
+      <label htmlFor="repair-description">Describe the repair</label>
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}

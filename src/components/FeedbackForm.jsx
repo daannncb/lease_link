@@ -21,7 +21,7 @@ export default function FeedbackForm({ roleId }) {
 
     return (
     <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-md space-y-4">
-        <h2 className="text-xl font-semibold text-slate-700">Leave Feedback</h2>
+        <h1 className="text-xl font-semibold text-slate-700">Leave Feedback</h1>
 
         <StarRating onRatingSelect={setRating} defaultRating={rating} />
 
@@ -39,6 +39,12 @@ export default function FeedbackForm({ roleId }) {
         className="bg-(--color-sage-green) text-(--color-beige) px-4 py-2 rounded hover:opacity-90 transition"
         >
         {isPending ? "Submitting..." : "Submit Feedback"}
+        <div
+    aria-live="polite"
+    className="mt-2 text-sm text-gray-700 dark:text-beige"
+    >
+    {message}
+    </div>
         </button>
     </form>
     );
