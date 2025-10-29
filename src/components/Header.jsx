@@ -10,18 +10,22 @@ export default function Header() {
     const isLight = theme.mode === "light";
 
     return (
-    <header className={`${theme.headerFooterBg} shadow-lg`}>
-        <div className="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-(--color-beige) font-bold text-4xl">
-            Lease
-            <Image
-            src="/logo.png"
-            alt="Lease Link Logo"
-            width={50}
-            height={50}
-            />
-            Link
-        </div>
+    <header
+    className={`${theme.headerFooterBg} shadow-2xl relative z-50`}
+>
+    <div className="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between">
+    <div className="flex items-center gap-2 text-(--color-beige) font-bold text-4xl shadow-lg drop-shadow-lg">
+        Lease
+        <Image
+        src="/logo.png"
+        alt="Lease Link Logo"
+        width={50}
+        height={50}
+        className="shadow-xl rounded-full"
+        />
+        Link
+    </div>
+
 
         {/* Toggle icon */}
         <button
