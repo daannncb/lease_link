@@ -14,9 +14,7 @@ export default async function LandlordPropertiesView({ params }) {
   const clerkId = clerkIdRes.rows[0];
 
   const user = await currentUser();
-  // console.log("user:", user);
-  console.log(user.id);
-  console.log(clerkId);
+
   if (!user || user.id !== clerkId.clerk_id) {
     redirect("/unauthorized");
   }
@@ -56,12 +54,11 @@ export default async function LandlordPropertiesView({ params }) {
 
       <div className="flex flex-col gap-12">
         {properties.map((property) => (
-          <Link key={property.id} href={`/properties/${property.id}`}>
-            <div
-              key={property.id}
-              className="p-6 rounded-xl shadow-md transition-colors duration-300 bg-white/70 border border-sage-green/50 dark:bg-sage-green/30 dark:border-beige"
-            >
-              <h2 className="text-2xl font-semibold mb-2 text-sage-green dark:text-beige">
+          <div
+            key={property.id}
+            className="p-6 rounded-xl shadow-md transition-colors duration-300 bg-white/70 border border-sage-green/50 dark:bg-sage-green/30 dark:border-beige"
+          >
+            {/* <h2 className="text-2xl font-semibold mb-2 text-sage-green dark:text-beige">
                 {property.address_line1}
               </h2>
               <p className="text-gray-700 mb-4 dark:text-beige/90">
@@ -70,18 +67,19 @@ export default async function LandlordPropertiesView({ params }) {
               </p>
               <p className="text-gray-600 mb-4 dark:text-beige/80">
                 {property.description}
-              </p>
-
+              </p> */}
+            <Link key={property.id} href={`/properties/${property.id}`}>
               <PropertiesCarousel properties={[property]} />
-
-              <div className="mt-6">
-                <h3 className="text-xl font-semibold mb-2 text-sage-green dark:text-beige">
-                  Tenant Feedback
-                </h3>
+            </Link>
+            <div className="mt-6">
+              <h3 className="text-xl font-semibold mb-2 text-sage-green dark:text-beige">
+                Tenant Feedback
+              </h3>
+              <Link href={`/properties/${property.id}/feedback`}>
                 <FeedbackDisplay userId={userId} />
-              </div>
+              </Link>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
