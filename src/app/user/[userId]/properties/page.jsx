@@ -34,6 +34,7 @@ export default async function LandlordPropertiesView({ params }) {
     WHERE roles.landlord_id = (
       SELECT id FROM users WHERE clerk_id = $1
     )
+      ORDER BY properties.id DESC
   `,
     [clerkId.clerk_id]
   );

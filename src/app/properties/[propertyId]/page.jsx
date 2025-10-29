@@ -7,7 +7,7 @@ import ImagePage from "@/components/ImageUploader";
 
 
 export const metadata = {
-  title: "Property Details – LeaseLink",
+  title: "Property Details, LeaseLink",
   description: "View property details, repairs, and submit new repair requests.",
   icons: { icon: "/logo.png" },
 };
@@ -17,12 +17,20 @@ export default async function PropertyPage({ params }) {
   const propertyId = (await params).propertyId;
   //get landlord id from roles table to pass as a param
   const res = await db.query(
-    `SELECT id FROM roles WHERE property_id = ${propertyId} AND landlord_id IS NOT NULL`
-  );
+  `SELECT id FROM roles WHERE property_id = $1 AND landlord_id IS NOT NULL`,
+  [propertyId]
+);
+
   //get tenant info for emails to pass as param
   const res2 = await db.query(
-    `SELECT users.full_name, properties.address_line1, properties.address_line2, properties.city, properties.postcode FROM users JOIN roles ON users.id = roles.tenant_id JOIN properties ON roles.property_id = properties.id WHERE roles.property_id = ${propertyId} AND tenant_id IS NOT NULL`
-  );
+  `SELECT users.full_name, properties.address_line1, properties.address_line2, properties.city, properties.postcode 
+    FROM users 
+    JOIN roles ON users.id = roles.tenant_id 
+    JOIN properties ON roles.property_id = properties.id 
+    WHERE roles.property_id = $1 AND tenant_id IS NOT NULL`,
+  [propertyId]
+);
+
   const tenantData = res2.rows[0];
   const tenantName = tenantData.full_name;
   console.log(tenantData);
