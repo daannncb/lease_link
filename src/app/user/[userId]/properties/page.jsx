@@ -1,15 +1,15 @@
 
 import { db } from "@/utils/dbConnection";
-import PropertiesCarousel from '@/components/PropertiesCarousel';
-import { auth } from '@clerk/nextjs';
+import PropertiesCarousel from '@/components/PropertiesCarousels';
+import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from 'next/navigation';
+import FeedbackDisplay from "@/components/FeedbackDisplay";
 
 export default async function LandlordPropertiesView({ params }) {
-  const { userId: clerkId } = auth(); 
-  const { userId } = params;
-  if (!clerkId || clerkId !== userId) {
-    redirect('/unauthorized'); 
-  }
+  const user = await currentUser();
+  if (!user || user.id !== params.userId) {
+  redirect("/unauthorized");
+}
 
   const res = await db.query(`
     SELECT 
@@ -38,9 +38,39 @@ export default async function LandlordPropertiesView({ params }) {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold text-slate-700 mb-6">My Properties</h1>
-      <PropertiesCarousel properties={properties} />
+      <div className="p-6 max-w-7xl mx-auto space-y-12">
+      <h1 className="text-3xl font-bold mb-6 text-slate-700 dark:text-beige">
+        My Properties
+      </h1>
+
+      <div className="flex flex-col gap-12">
+        {properties.map((property) => (
+          <div
+            key={property.id}
+            className="p-6 rounded-xl shadow-md transition-colors duration-300 bg-white/70 border border-sage-green/50 dark:bg-sage-green/30 dark:border-beige"
+          >
+        
+            <h2 className="text-2xl font-semibold mb-2 text-sage-green dark:text-beige">
+              {property.address_line1}
+            </h2>
+            <p className="text-gray-700 mb-4 dark:text-beige/90">
+              {property.address_line2}, {property.city}, {property.postcode}, {property.country}
+            </p>
+            <p className="text-gray-600 mb-4 dark:text-beige/80">{property.description}</p>
+
+    
+            <PropertiesCarousel properties={[property]} />
+
+        
+            <div className="mt-6">
+              <h3 className="text-xl font-semibold mb-2 text-sage-green dark:text-beige">
+                Tenant Feedback
+              </h3>
+              <FeedbackDisplay propertyId={property.id} />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
