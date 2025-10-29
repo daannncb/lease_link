@@ -3,18 +3,22 @@ import { db } from "@/utils/dbConnection";
 
 export default async function CreateProfile() {
   const res = await db.query(
-    //! security issue! remove * and replace with address fields
-    `SELECT * FROM properties JOIN roles ON properties.id = roles.property_id WHERE roles.tenant_id IS NULL`
-  );
+  `SELECT properties.id, properties.address_line1, properties.address_line2, properties.city, properties.postcode, properties.country
+    FROM properties
+    JOIN roles ON properties.id = roles.property_id
+    WHERE roles.tenant_id IS NULL`
+);
+
 
   async function handleSubmit(formData) {
     "use server";
     const userProperty = formData.get("properties");
     console.log(userProperty);
     await db.query(
-      `INSERT INTO roles (tenant_id) VALUES ($1) WHERE property_id = $2`,
-      [userRole, userProperty]
-    );
+  `UPDATE roles SET tenant_id = $1 WHERE property_id = $2`,
+  [userRole, userProperty]
+);
+
   }
 
   const properties = res.rows;

@@ -8,15 +8,21 @@ export default async function ViewDynamicRepair({ params }) {
 
   //get repair info
   const repairRes = await db.query(
-    `SELECT * FROM repairs WHERE id = ${repairId}`
-  );
+  `SELECT id, title, description, status, created_at FROM repairs WHERE id = $1`,
+  [repairId]
+);
+
   const repairData = repairRes.rows[0];
   // console.log(repairData);
   //get comments info
   const commentRes = await db.query(
-    `SELECT * FROM repairs JOIN comments on repairs.id = comments.repair_id JOIN users ON comments.user_id = users.id WHERE repairs.id = $1`,
-    [repairId]
-  );
+  `SELECT comments.id, comments.comment, users.full_name
+    FROM comments
+    JOIN users ON comments.user_id = users.id
+    WHERE comments.repair_id = $1`,
+  [repairId]
+);
+
   const commentData = commentRes.rows;
 
   return (
