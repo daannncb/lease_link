@@ -12,7 +12,7 @@ export const metadata = {
     title: "LeaseLink, One App. Every Issue. No Hassle",
     description:
       "Manage properties, tenants, repairs, and feedback efficiently.",
-    url: "https://lease-link-nu.vercel.app/",
+    url: "https://lease-link-4ood.vercel.app",
     images: [
       {
         url: "/homes.jpeg", 

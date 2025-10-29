@@ -35,6 +35,8 @@ export default function Header() {
           <button
             onClick={() => dispatch({ type: "toggle" })}
             className="p-2 rounded hover:opacity-80 transition"
+              aria-label="Toggle dark mode"
+              title="Toggle dark mode"
           >
             <FaRegMoon
               className={`w-8 h-8 transition-transform duration-300 hover:scale-110 ${
