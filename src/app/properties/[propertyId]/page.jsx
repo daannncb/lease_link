@@ -3,6 +3,7 @@ import { db } from "@/utils/dbConnection";
 import GetRepairsListLandlord from "@/components/GetRepairsListLandlord";
 import PropertyView from "@/components/PropertyView";
 import GetRepairsListProperties from "@/components/GetRepairListProperties";
+import ImagePage from "@/components/ImageUploader";
 
 export default async function PropertyPage({ params }) {
   const propertyId = (await params).propertyId;
@@ -40,6 +41,7 @@ export default async function PropertyPage({ params }) {
           propertyAddress={propertyAddress}
           tenantName={tenantName}
         />
+        <ImagePage />
       </div>
       <div>
         {/* <GetRepairsListLandlord propertyId={propertyId} /> */}
