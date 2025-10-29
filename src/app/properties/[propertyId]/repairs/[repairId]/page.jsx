@@ -1,5 +1,6 @@
 //! dynamic route for displaying single repairs, navigated from list of properties
 import { db } from "@/utils/dbConnection";
+import StoredImageRenderer from "@/components/StoredImageRenderer";
 
 export default async function ViewDynamicRepair({ params }) {
   const propertyId = (await params).propertyId;
@@ -10,10 +11,11 @@ export default async function ViewDynamicRepair({ params }) {
     `SELECT * FROM repairs WHERE id = ${repairId}`
   );
   const repairData = repairRes.rows[0];
-  console.log(repairData);
+  // console.log(repairData);
   //get comments info
   const commentRes = await db.query(
-    `SELECT * FROM repairs JOIN comments on repairs.id = comments.repair_id JOIN users ON comments.user_id = users.id WHERE repairs.id = ${repairId}`
+    `SELECT * FROM repairs JOIN comments on repairs.id = comments.repair_id JOIN users ON comments.user_id = users.id WHERE repairs.id = $1`,
+    [repairId]
   );
   const commentData = commentRes.rows;
 
@@ -21,6 +23,7 @@ export default async function ViewDynamicRepair({ params }) {
     <>
       <div>
         <h1>{repairData.title}</h1>
+        <StoredImageRenderer />
         <p>{repairData.description}</p>
         <br></br>
       </div>
