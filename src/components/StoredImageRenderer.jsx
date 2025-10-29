@@ -6,7 +6,10 @@ export default function StoredImageRenderer() {
   const supabase = createSupabaseClient();
   const { data } = supabase.storage
     .from("HugeBarginBucket")
+    //////////////////////
+    //! this needs to be a dynamic route, OR we store the supabase URL for this image in the repairs table at point of upload in the imageUploader.js component
     .getPublicUrl("uploads/56fd1a47-ec9f-4176-b47c-55c4c700634f.svg");
+  //////////////////////
 
   console.log("ImageRenderer:", data.publicUrl);
 
@@ -17,3 +20,13 @@ export default function StoredImageRenderer() {
     </div>
   );
 }
+
+// const { data } = supabase
+// .storage
+// .from('public-bucket')
+// .getPublicUrl('folder/avatar1.png', {
+//   transform: {
+//     width: 100,
+//     height: 100,
+//   }
+// })
