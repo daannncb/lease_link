@@ -4,6 +4,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ReducerTheme from "@/components/reducerTheme";
 
+export const metadata = {
+  title: 'LeaseLink',
+  description: 'One App. Every Issue. No Hassle',
+  icons: {
+    icon: '/logo.png',
+  },
+}
+
 
 export default function RootLayout({ children }) {
   return (
