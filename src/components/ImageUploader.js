@@ -1,4 +1,6 @@
 "use client";
+//! task for wednesday morning: console.log to find the image url that is stored in the bucket. grab this in the middle of doing the upload and insert URL into repairs table
+//* look for `${bucket_file}` kind of dynamic route
 
 import Image from "next/image";
 import { useRef, useState, useTransition } from "react";
