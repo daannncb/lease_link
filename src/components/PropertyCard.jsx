@@ -7,9 +7,11 @@ export default function PropertyCard({ property }) {
       {property.address_line2 && (
         <p className="text-gray-600">{property.address_line2}</p>
       )}
-      <p className="text-gray-600">{property.city}, {property.postcode}</p>
+      <p className="text-gray-600">
+        {property.city}, {property.postcode}
+      </p>
       <p className="text-gray-600">{property.country}</p>
-      
+
       {property.description && (
         <p className="text-gray-500 mt-4 text-sm">{property.description}</p>
       )}
