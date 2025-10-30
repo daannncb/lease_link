@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { useTheme } from "@/components/reducerTheme";
 import { FaRegMoon } from "react-icons/fa";
-import { SignOutButton } from "@clerk/nextjs";
+import { SignOutButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 
 export default function Header() {
   const { theme, dispatch } = useTheme();
+  const { user, isSignedIn } = useUser();
 
   const isLight = theme.mode === "light";
 
@@ -27,11 +28,19 @@ export default function Header() {
             Link
           </div>
         </Link>
+
         <div className="flex align-middle gap-3">
+             {isSignedIn && (
+                <>
+            <div className="text-(--color-beige) font-semibold text-2xl flex items-center">
+              Welcome, {user.firstName}!
+            </div>
+        
           <SignOutButton
-            className={`px-6 py-3 bg-(--color-beige) text-(--color-sage-green) font-medium rounded-lg shadow-lg hover:shadow-2xl transition duration-300`}
+            className={`px-6 py-3 bg-(--color-beige) text-(--color-sage-green) font-medium rounded-lg shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer`}
           />
-          {/* Toggle icon */}
+</>
+  )}
           <button
             onClick={() => dispatch({ type: "toggle" })}
             className="p-2 rounded hover:opacity-80 transition"
