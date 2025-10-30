@@ -28,7 +28,7 @@ export default function ImagePage() {
         try {
           const { imageUrl, error } = await uploadImage({
             file,
-            bucket: "HugeBargainBucket",
+            bucket: "HugeBarginBucket",
             folder: "uploads",
           });
 
