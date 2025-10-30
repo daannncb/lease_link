@@ -6,19 +6,16 @@ export const metadata = {
     "Welcome to LeaseLink — connecting landlords and tenants with easy communication, repair management, and feedback tools.",
 };
 
-
 export default function Landing() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center text-center px-6">
-      <h1
-        className="text-4xl md:text-5xl font-extrabold text-heading drop-shadow-lg"
-      >
+      <h1 className="text-4xl md:text-5xl font-extrabold text-heading drop-shadow-lg">
         Welcome to LeaseLink!
       </h1>
 
       <p className="mt-4 text-lg md:text-xl text-body max-w-3xl p-4 rounded bg-blur shadow-md">
-        Say goodbye to communication problems with our wonderful website
-        working brilliantly to bring you solutions for your problems.
+        Keep everyone in the loop with LeaseLink. No more communication
+        headaches, just clear solutions.
       </p>
 
       <RoleCards />
