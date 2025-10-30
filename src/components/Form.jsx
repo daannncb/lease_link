@@ -3,7 +3,7 @@ import RepairCommentList from "./RepairCommentList";
 export default function Form ({ repair, comments, deleteAction }) {
     return (
         <div className="max-w-4xl mx-auto p-6">
-            <div className="bg-slate-600 text-white p-6 rounded-lg mb-6 shadow-lg">
+            <div className="bg-slate-600 text-whitep6 rounded-lg mb-6 shadow-lg">
                 <h1 className="text-2xl font-bold mb-2">Repair Ticket</h1>
                 <p className="text-lg">{repair.description}</p>
                 <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mt-3 ${

@@ -14,13 +14,14 @@ export const metadata = {
 
 export default async function PropertyPage({ params }) {
   const propertyId = (await params).propertyId;
-  //get landlord id from roles table to pass as a param
+  
+
   const res = await db.query(
     `SELECT id FROM roles WHERE property_id = $1 AND landlord_id IS NOT NULL`,
     [propertyId]
   );
 
-  //get tenant info for emails to pass as param
+
   const res2 = await db.query(
     `SELECT users.full_name, properties.address_line1, properties.address_line2, properties.city, properties.postcode 
     FROM users 
@@ -32,37 +33,58 @@ export default async function PropertyPage({ params }) {
 
   const tenantData = res2.rows[0];
   const tenantName = tenantData.full_name;
-  console.log(tenantData);
   const propertyAddress = `
-    ${tenantData.address_line1}, <br>
-      ${tenantData.address_line2}, <br>
-      ${tenantData.city}, <br>
-      ${tenantData.postcode}
+    ${tenantData.address_line1}, 
+    ${tenantData.address_line2}, 
+    ${tenantData.city}, 
+    ${tenantData.postcode}
   `;
 
-  console.log("Property address", propertyAddress);
   const roleId = res.rows[0].id;
 
-  // if (clerk user = tenant id/landlord id)
   return (
-    <>
-      <div className="flex flex-col px-6">
-        <h1 className="text-2xl font-bold border-b">PROPERTY VIEW:</h1>
-        <PropertyView propertyId={propertyId} />
-        <GetRepairsListProperties propertyId={propertyId} />
-        <h1 className="text-4xl font-bold border-b">ADD NEW REPAIR:</h1>
-        <RepairForm
-          className="text-4xl md-4 font-bold"
-          roleId={roleId}
-          propertyAddress={propertyAddress}
-          tenantName={tenantName}
-        />
-        <ImagePage className="border-color #5f6b66 shadow-md h-24 w-24" />
+    <main className="min-h-screen py-8">
+      <div className="max-w-6xl mx-auto px-6 space-y-8">
+       
+        <section className="bg-white/10 backdrop-blur-sm rounded-xl shadow-lg border-2 border-gray-400/30 p-6">
+          <header className="mb-6 pb-4 border-b-2 border-current">
+            <h1 className="text-2xl font-bold">
+              PROPERTY VIEW
+            </h1>
+          </header>
+          <PropertyView propertyId={propertyId} />
+        </section>
+
+        <section className="bg-white/10 backdrop-blur-sm rounded-xl shadow-lg border-2 border-gray-400/30 p-6">
+          <header className="mb-6 pb-4 border-b-2 border-current">
+            <h2 className="text-2xl font-bold">
+              REPAIRS
+            </h2>
+          </header>
+          <GetRepairsListProperties propertyId={propertyId} />
+        </section>
+
+        <section className="bg-white/10 backdrop-blur-sm rounded-xl shadow-lg border-2 border-gray-400/30 p-6">
+          <header className="mb-6 pb-4 border-b-2 border-current">
+            <h2 className="text-2xl font-bold">
+              ADD NEW REPAIR
+            </h2>
+          </header>
+          <div className="space-y-6">
+            <RepairForm
+              roleId={roleId}
+              propertyAddress={propertyAddress}
+              tenantName={tenantName}
+            />
+            
+            <div className="mt-6 p-6 bg-white/5 backdrop-blur-sm rounded-lg border-2 border-gray-400/30">
+              <h3 className="text-xl font-semibold mb-4">Upload Images</h3>
+              <ImagePage />
+            </div>
+          </div>
+        </section>
+
       </div>
-      <div>
-        {/* <GetRepairsListLandlord propertyId={propertyId} /> */}
-        {/* This list needs some formatting, and the query looking at. Just added to see whats up with this */}
-      </div>
-    </>
+    </main>
   );
 }

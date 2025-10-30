@@ -31,6 +31,7 @@ export default function RepairForm({ roleId, propertyAddress, tenantName }) {
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Describe the repair"
         required
+        className="placeholder:text-gray-700 placeholder:opacity-100"
       />
       <button type="submit">Submit Repair</button>
     </form>
