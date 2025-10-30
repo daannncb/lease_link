@@ -1,9 +1,14 @@
 import { db } from "@/utils/dbConnection";
-import { currentUser } from "@clerk/nextjs/dist/types/server";
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 export default async function CreateProfile() {
   const user = await currentUser();
   //! get clerk_id from user, get id from clerk_id query users, set userRole = to this
+  const clerkId = user.id;
+  const userId = (
+    await db.query(`SELECT id FROM users WHERE clerk_id = $1`, [clerkId])
+  ).rows[0].id;
 
   const res = await db.query(
     `SELECT properties.id, properties.address_line1, properties.address_line2, properties.city, properties.postcode, properties.country
@@ -17,9 +22,10 @@ export default async function CreateProfile() {
     const userProperty = formData.get("properties");
     console.log(userProperty);
     await db.query(`UPDATE roles SET tenant_id = $1 WHERE property_id = $2`, [
-      userRole,
+      userId,
       userProperty,
     ]);
+    redirect(`/properties/${userProperty}`);
   }
 
   const properties = res.rows;
