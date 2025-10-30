@@ -5,31 +5,30 @@ import PropertyView from "@/components/PropertyView";
 import GetRepairsListProperties from "@/components/GetRepairListProperties";
 import ImagePage from "@/components/ImageUploader";
 
-
 export const metadata = {
   title: "Property Details, LeaseLink",
-  description: "View property details, repairs, and submit new repair requests.",
+  description:
+    "View property details, repairs, and submit new repair requests.",
   icons: { icon: "/logo.png" },
 };
-
 
 export default async function PropertyPage({ params }) {
   const propertyId = (await params).propertyId;
   //get landlord id from roles table to pass as a param
   const res = await db.query(
-  `SELECT id FROM roles WHERE property_id = $1 AND landlord_id IS NOT NULL`,
-  [propertyId]
-);
+    `SELECT id FROM roles WHERE property_id = $1 AND landlord_id IS NOT NULL`,
+    [propertyId]
+  );
 
   //get tenant info for emails to pass as param
   const res2 = await db.query(
-  `SELECT users.full_name, properties.address_line1, properties.address_line2, properties.city, properties.postcode 
+    `SELECT users.full_name, properties.address_line1, properties.address_line2, properties.city, properties.postcode 
     FROM users 
     JOIN roles ON users.id = roles.tenant_id 
     JOIN properties ON roles.property_id = properties.id 
     WHERE roles.property_id = $1 AND tenant_id IS NOT NULL`,
-  [propertyId]
-);
+    [propertyId]
+  );
 
   const tenantData = res2.rows[0];
   const tenantName = tenantData.full_name;
@@ -47,11 +46,11 @@ export default async function PropertyPage({ params }) {
   // if (clerk user = tenant id/landlord id)
   return (
     <>
-      <div>
-        <h1>PROPERTY VIEW:</h1>
+      <div className="min-h-screen flex flex-col justify-center items-center text-center px-6">
+        <h1 className="text-2xl font-bold">PROPERTY VIEW:</h1>
         <PropertyView propertyId={propertyId} />
         <GetRepairsListProperties propertyId={propertyId} />
-        <h1>ADD NEW REPAIR:</h1>
+        <h1 className="text-2xl font-bold">ADD NEW REPAIR:</h1>
         <RepairForm
           roleId={roleId}
           propertyAddress={propertyAddress}

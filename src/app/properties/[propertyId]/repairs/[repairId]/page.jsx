@@ -8,36 +8,36 @@ export default async function ViewDynamicRepair({ params }) {
 
   //get repair info
   const repairRes = await db.query(
-  `SELECT id, title, description, status, created_at FROM repairs WHERE id = $1`,
-  [repairId]
-);
+    `SELECT id, title, description, status, created_at FROM repairs WHERE id = $1`,
+    [repairId]
+  );
 
   const repairData = repairRes.rows[0];
   // console.log(repairData);
   //get comments info
   const commentRes = await db.query(
-  `SELECT comments.id, comments.comment, users.full_name
+    `SELECT comments.id, comments.comment, users.full_name
     FROM comments
     JOIN users ON comments.user_id = users.id
     WHERE comments.repair_id = $1`,
-  [repairId]
-);
+    [repairId]
+  );
 
   const commentData = commentRes.rows;
 
   return (
     <>
-      <div>
-        <h1>{repairData.title}</h1>
+      <div className="min-h-screen flex flex-col justify-center items-center text-center px-6">
+        <h1 className="text-2xl font-bold">{repairData.title}</h1>
         <StoredImageRenderer />
-        <p>{repairData.description}</p>
+        <p className="text-lg">{repairData.description}</p>
         <br></br>
       </div>
-      <div>
+      <div className="min-h-screen flex flex-col justify-center items-center text-center px-6">
         {commentData.map((comment) => {
           return (
             <div key={comment.id}>
-              <p>{comment.full_name} said:</p>
+              <p className="font-bold">{comment.full_name} said:</p>
               <p>{comment.comment}</p>
               <br></br>
             </div>

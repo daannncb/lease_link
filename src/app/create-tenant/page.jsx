@@ -22,11 +22,13 @@ export default async function CreateProfile() {
 
   console.log(properties);
   return (
-    <div>
-      <h1>Please select the property you&apos;re renting:</h1>
+    <div className="min-h-screen flex flex-col justify-center items-center text-center px-6">
+      <h1 className="text-2xl font-bold mb-4">
+        Please select the property you&apos;re renting:
+      </h1>
       <fieldset>
         <form action={handleSubmit}>
-          <div>
+          <div className="mb-4">
             <label htmlFor="property-select" className="block mb-2 font-medium">
               Select a property:
             </label>
@@ -41,7 +43,9 @@ export default async function CreateProfile() {
               })}
             </select>
           </div>
-          <button type="submit">Create Profile</button>
+          <button className="px-4 py-2 rounded" type="submit">
+            Create Profile
+          </button>
         </form>
       </fieldset>
     </div>
