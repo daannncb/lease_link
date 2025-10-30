@@ -1,9 +1,11 @@
 import RepairForm from "@/components/repairForm";
-import { db } from "@/utils/dbConnection";
+import TenantRepairsList from "@/components/TenantsRepairList";
 import GetRepairsListLandlord from "@/components/GetRepairsListLandlord";
 import PropertyView from "@/components/PropertyView";
-import GetRepairsListProperties from "@/components/GetRepairListProperties";
 import ImagePage from "@/components/ImageUploader";
+import { db } from "@/utils/dbConnection";
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Property Details, LeaseLink",
@@ -14,7 +16,30 @@ export const metadata = {
 
 export default async function PropertyPage({ params }) {
   const propertyId = (await params).propertyId;
-  //get landlord id from roles table to pass as a param
+  // Fetch tenant info
+  const { userId } = auth();
+  if (!userId) {
+    redirect("/sign-in");
+  }
+
+  const user = await currentUser();
+
+
+  const dbUserResult = await db.query(
+    `SELECT id, clerk_id, full_name, email 
+      FROM users 
+      WHERE clerk_id = $1`,
+    [user.id]
+  );
+
+  const dbUser = dbUserResult.rows[0];
+
+  if (!dbUser) {
+    console.error("❌ User exists but not found:", user.id);
+    throw new Error("User not found");
+  }
+
+  //  I'm thinking to Fetch tenant + landlord info for the property?
   const res = await db.query(
     `SELECT id FROM roles WHERE property_id = $1 AND landlord_id IS NOT NULL`,
     [propertyId]
@@ -34,16 +59,17 @@ export default async function PropertyPage({ params }) {
   const tenantName = tenantData.full_name;
   console.log(tenantData);
   const propertyAddress = `
-    ${tenantData.address_line1}, <br>
-      ${tenantData.address_line2}, <br>
-      ${tenantData.city}, <br>
-      ${tenantData.postcode}
+    ${addressLine1}, 
+    ${addressLine2}, 
+    ${city}, 
+    ${postcode}, 
+    ${country}
   `;
 
-  console.log("Property address", propertyAddress);
-  const roleId = res.rows[0].id;
+  // we can see the user type
+  const isTenant = dbUser.id === tenantId;
+  const isLandlord = dbUser.id === landlordId;
 
-  // if (clerk user = tenant id/landlord id)
   return (
     <>
       <div className="flex flex-col px-6">
@@ -59,10 +85,36 @@ export default async function PropertyPage({ params }) {
         />
         <ImagePage className="border-color #5f6b66 shadow-md h-24 w-24" />
       </div>
-      <div>
-        {/* <GetRepairsListLandlord propertyId={propertyId} /> */}
-        {/* This list needs some formatting, and the query looking at. Just added to see whats up with this */}
-      </div>
-    </>
+
+       {isTenant && (
+        <div>
+          <h1 className="text-2xl font-bold">Submit a Repair</h1>
+          {roleId ? (
+            <RepairForm
+              roleId={roleId}
+              propertyAddress={propertyAddress}
+              tenantName={tenantName}
+            />
+          ) : (
+            <p>Role not found for this property.</p>
+          )}
+          <ImagePage />
+        </div>
+      )}
+
+      {isTenant && (
+        <div>
+          <h1 className="text-2xl font-bold">Your Repairs</h1>
+          <TenantRepairsList roleId={roleId} />
+        </div>
+      )}
+
+      {isLandlord && (
+        <div>
+          <h1 className="text-2xl font-bold">Repairs (Landlord View)</h1>
+          <GetRepairsListLandlord landlordId={dbUser.id} />
+        </div>
+      )}
+    </div>
   );
 }
