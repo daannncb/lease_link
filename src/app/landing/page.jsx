@@ -25,7 +25,7 @@ export default function Landing() {
           <h3 className="text-lg md:text-4xl font-semibold text-heading drop-shadow-md opacity-90">
             One App. Every Issue. No Hassle
           </h3>
-        </div>
+        </div> 
       </div>
     </div>
   );
