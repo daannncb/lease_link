@@ -18,7 +18,7 @@ export default function RoleCards() {
         if (role === "tenant") {
           router.push("/create-tenant");
         } else if (role === "landlord") {
-          router.push("/properties/create");
+          router.push("/create-landlord");
         }
       }, 800);
     } catch (err) {

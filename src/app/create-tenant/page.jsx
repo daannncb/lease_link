@@ -3,6 +3,7 @@ import { currentUser } from "@clerk/nextjs/dist/types/server";
 
 export default async function CreateProfile() {
   const user = await currentUser();
+  //! get clerk_id from user, get id from clerk_id query users, set userRole = to this
 
   const res = await db.query(
     `SELECT properties.id, properties.address_line1, properties.address_line2, properties.city, properties.postcode, properties.country
