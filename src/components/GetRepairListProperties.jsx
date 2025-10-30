@@ -4,7 +4,8 @@ import Link from "next/link";
 
 export default async function GetRepairsListProperties({ propertyId }) {
   const res = await db.query(
-    `SELECT * FROM repairs WHERE status != 'RESOLVED'`
+    `SELECT * FROM repairs WHERE status != 'RESOLVED' AND property_id = $1`,
+    [propertyId]
   );
   const repairs = res.rows;
   // console.log(properties);
