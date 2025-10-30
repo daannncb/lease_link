@@ -1,4 +1,4 @@
-import RepairCommentList from "./RepairCommentList";
+import RepairCommentList from "@/components/RepairCommentList";
 
 export default function Form ({ repair, comments, deleteAction }) {
     return (

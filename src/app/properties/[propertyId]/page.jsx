@@ -1,10 +1,9 @@
-import RepairForm from "@/components/repairForm";
-import { db } from "@/utils/dbConnection";
+import RepairForm from "@/components/RepairForm";
+import TenantRepairsList from "@/components/TenantRepairsList";
 import GetRepairsListLandlord from "@/components/GetRepairsListLandlord";
 import PropertyView from "@/components/PropertyView";
-import GetRepairsListProperties from "@/components/GetRepairListProperties";
 import ImagePage from "@/components/ImageUploader";
-
+import { db } from "@/utils/dbConnection";
 
 export const metadata = {
   title: "Property Details, LeaseLink",
@@ -12,57 +11,59 @@ export const metadata = {
   icons: { icon: "/logo.png" },
 };
 
-
 export default async function PropertyPage({ params }) {
-  const propertyId = (await params).propertyId;
-  //get landlord id from roles table to pass as a param
-  const res = await db.query(
-  `SELECT id FROM roles WHERE property_id = $1 AND landlord_id IS NOT NULL`,
-  [propertyId]
-);
+  const propertyId = params.propertyId;
 
-  //get tenant info for emails to pass as param
-  const res2 = await db.query(
-  `SELECT users.full_name, properties.address_line1, properties.address_line2, properties.city, properties.postcode 
-    FROM users 
-    JOIN roles ON users.id = roles.tenant_id 
-    JOIN properties ON roles.property_id = properties.id 
-    WHERE roles.property_id = $1 AND tenant_id IS NOT NULL`,
-  [propertyId]
-);
+  // Fetch tenant info
+  const resTenant = await db.query(
+    `SELECT users.full_name, properties.address_line1, properties.address_line2, properties.city, properties.postcode, roles.id AS role_id
+      FROM users
+      JOIN roles ON users.id = roles.tenant_id
+      JOIN properties ON roles.property_id = properties.id
+      WHERE roles.property_id = $1`,
+    [propertyId]
+  );
 
-  const tenantData = res2.rows[0];
-  const tenantName = tenantData.full_name;
-  console.log(tenantData);
+  const tenantData = resTenant.rows[0] || {};
+  const tenantName = tenantData.full_name || "Tenant";
   const propertyAddress = `
-    ${tenantData.address_line1}, <br>
-      ${tenantData.address_line2}, <br>
-      ${tenantData.city}, <br>
-      ${tenantData.postcode}
+    ${tenantData.address_line1 || ""}, 
+    ${tenantData.address_line2 || ""}, 
+    ${tenantData.city || ""}, 
+    ${tenantData.postcode || ""}
   `;
+  const roleId = tenantData.role_id || null;
 
-  console.log("Property address", propertyAddress);
-  const roleId = res.rows[0].id;
-
-  // if (clerk user = tenant id/landlord id)
   return (
-    <>
+    <div className="space-y-12">
       <div>
-        <h1>PROPERTY VIEW:</h1>
+        <h1 className="text-2xl font-bold">Property Details</h1>
         <PropertyView propertyId={propertyId} />
-        <GetRepairsListProperties propertyId={propertyId} />
-        <h1>ADD NEW REPAIR:</h1>
-        <RepairForm
-          roleId={roleId}
-          propertyAddress={propertyAddress}
-          tenantName={tenantName}
-        />
+      </div>
+
+      <div>
+        <h1 className="text-2xl font-bold">Submit a Repair</h1>
+        {roleId ? (
+          <RepairForm
+            roleId={roleId}
+            propertyAddress={propertyAddress}
+            tenantName={tenantName}
+          />
+        ) : (
+          <p>Role not found for this property.</p>
+        )}
         <ImagePage />
       </div>
+
       <div>
-        {/* <GetRepairsListLandlord propertyId={propertyId} /> */}
-        {/* This list needs some formatting, and the query looking at. Just added to see whats up with this */}
+        <h1 className="text-2xl font-bold">Repairs (Tenant view)</h1>
+        {roleId && <TenantRepairsList roleId={roleId} />}
       </div>
-    </>
+
+      <div>
+        <h1 className="text-2xl font-bold">Repairs (Landlord view)</h1>
+        <GetRepairsListLandlord landlordId={2} /> {/* I did this for testing only, we'll replace with actual logged-in landlord ID or clerk id */}
+      </div>
+    </div>
   );
 }
