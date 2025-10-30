@@ -86,7 +86,7 @@ export default function CreateLandlord() {
     
         <button
             type="submit"
-            className={`px-5 py-3 mt-2 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] ${
+            className={`px-5 py-3 mt-2 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] cursor-pointer ${
             theme.mode === "light"
                 ? "bg-(--color-sage-green) text-(--color-beige) hover:opacity-90"
                 : "bg-(--color-beige) text-(--color-sage-green) hover:opacity-80"
