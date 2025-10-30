@@ -4,6 +4,8 @@
   --foreground: #171717;
   --color-sage-green: #5f6b66;
   --color-beige: #f5f1e9;
+  --blur-bg-light: rgba(255, 255, 255, 0.2);
+  --blur-bg-dark: rgba(23, 23, 23, 0.3);
 }
 
 .home-page-container {
@@ -30,3 +32,13 @@
     transition: none !important;
   }
 }
+
+[data-theme='dark'] {
+  --background: #171717;
+  --foreground: #f5f1e9;
+  --color-sage-green: #f5f1e9;
+  --color-beige: #5f6b66;
+  --blur-bg-light: rgba(255, 255, 255, 0.1);
+  --blur-bg-dark: rgba(23, 23, 23, 0.5);
+}
+
