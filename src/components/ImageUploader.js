@@ -1,6 +1,4 @@
 "use client";
-//! task for wednesday morning: console.log to find the image url that is stored in the bucket. grab this in the middle of doing the upload and insert URL into repairs table
-//* look for `${bucket_file}` kind of dynamic route
 
 import Image from "next/image";
 import { useRef, useState, useTransition } from "react";
@@ -13,9 +11,9 @@ export default function ImagePage() {
   const [isPending, startTransition] = useTransition();
   const imageInputRef = useRef(null);
 
-  // Handle file selection
   const handleImageChange = (e) => {
     if (!e.target.files) return;
+
     const files = Array.from(e.target.files);
     const previewUrls = files.map((file) => URL.createObjectURL(file));
     setSelectedImages(files);
@@ -30,7 +28,7 @@ export default function ImagePage() {
         try {
           const { imageUrl, error } = await uploadImage({
             file,
-            bucket: "HugeBarginBucket",
+            bucket: "HugeBargainBucket",
             folder: "uploads",
           });
 
@@ -40,6 +38,16 @@ export default function ImagePage() {
           }
 
           uploadedUrls.push(imageUrl);
+
+          const { data, dbError } = await supabase.from("repairs").insert({
+            img_url: imageUrl,
+            status: "PENDING",
+            description: null,
+          });
+
+          if (dbError) {
+            console.error("DB insert failed:", dbError);
+          }
         } catch (err) {
           console.error("Unexpected upload error:", err);
         }
@@ -52,7 +60,7 @@ export default function ImagePage() {
   };
 
   return (
-    <div className="bg-slate-900 min-h-screen flex flex-col items-center justify-center gap-8 text-white p-8">
+    <div className="bg-slate-900 min-h-screen flex flex-col items-center justify-start p-8 text-white">
       <h1 className="text-3xl font-bold mb-4">Supabase Image Upload Demo</h1>
 
       <input
@@ -66,7 +74,7 @@ export default function ImagePage() {
 
       <button
         onClick={() => imageInputRef.current?.click()}
-        className="px-4 py-2 bg-green-600 rounded hover:bg-green-700 transition"
+        className="px-4 py-2 bg-green-600 rounded hover:bg-green-700 transition mb-4"
         disabled={isPending}
       >
         Select Images
@@ -88,7 +96,7 @@ export default function ImagePage() {
 
       <button
         onClick={handleClickUploadImagesButton}
-        className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 transition"
+        className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 transition mt-4"
         disabled={isPending || selectedImages.length === 0}
       >
         {isPending ? "Uploading..." : "Upload to Supabase"}
