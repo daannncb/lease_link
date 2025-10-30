@@ -46,17 +46,17 @@ export default async function PropertyPage({ params }) {
   // if (clerk user = tenant id/landlord id)
   return (
     <>
-      <div className="min-h-screen flex flex-col justify-center items-center text-center px-6">
-        <h1 className="text-2xl font-bold">PROPERTY VIEW:</h1>
+      <div className="flex flex-col px-6">
+        <h1 className="text-2xl font-bold border-b">PROPERTY VIEW:</h1>
         <PropertyView propertyId={propertyId} />
         <GetRepairsListProperties propertyId={propertyId} />
-        <h1 className="text-2xl font-bold">ADD NEW REPAIR:</h1>
+        <h1 className="text-2xl font-bold border-b">ADD NEW REPAIR:</h1>
         <RepairForm
           roleId={roleId}
           propertyAddress={propertyAddress}
           tenantName={tenantName}
         />
-        <ImagePage />
+        <ImagePage className="border-color #5f6b66 shadow-md h-64 w-64" />
       </div>
       <div>
         {/* <GetRepairsListLandlord propertyId={propertyId} /> */}
