@@ -30,22 +30,22 @@ export default function Header() {
         </Link>
 
         <div className="flex align-middle gap-3">
-             {isSignedIn && (
-                <>
-            <div className="text-(--color-beige) font-semibold text-2xl flex items-center">
-              Welcome, {user.firstName}!
-            </div>
-        
-          <SignOutButton
-            className={`px-6 py-3 bg-(--color-beige) text-(--color-sage-green) font-medium rounded-lg shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer`}
-          />
-</>
-  )}
+          {isSignedIn && (
+            <>
+              <div className="text-(--color-beige) font-semibold text-2xl flex items-center">
+                Welcome, {user.firstName}!
+              </div>
+
+              <SignOutButton
+                className={`px-6 py-3 bg-(--color-beige) text-(--color-sage-green) font-medium rounded-lg shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer`}
+              />
+            </>
+          )}
           <button
             onClick={() => dispatch({ type: "toggle" })}
             className="p-2 rounded hover:opacity-80 transition"
-              aria-label="Toggle dark mode"
-              title="Toggle dark mode"
+            aria-label="Toggle dark mode"
+            title="Toggle dark mode"
           >
             <FaRegMoon
               className={`w-8 h-8 transition-transform duration-300 hover:scale-110 ${
