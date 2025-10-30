@@ -1,5 +1,5 @@
-import RepairForm from "@/components/RepairForm";
-import TenantRepairsList from "@/components/TenantRepairsList";
+import RepairForm from "@/components/repairForm";
+import TenantRepairsList from "@/components/TenantsRepairList";
 import GetRepairsListLandlord from "@/components/GetRepairsListLandlord";
 import PropertyView from "@/components/PropertyView";
 import ImagePage from "@/components/ImageUploader";
@@ -12,8 +12,7 @@ export const metadata = {
 };
 
 export default async function PropertyPage({ params }) {
-  const propertyId = params.propertyId;
-
+  const propertyId = (await params).propertyId;
   // Fetch tenant info
   const resTenant = await db.query(
     `SELECT users.full_name, properties.address_line1, properties.address_line2, properties.city, properties.postcode, roles.id AS role_id
