@@ -77,11 +77,14 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-
-      <div className="w-full max-w-7xl mx-auto mt-12 text-center">
-        <div className="inline-block p-8 rounded-3xl bg-white/30 dark:bg-slate-800/30 backdrop-blur-lg border border-white/20 dark:border-slate-700/40 shadow-lg">
+        <div className="w-full flex justify-center mt-12">
+        <div
+        className={`mt-12 inline-block p-8 rounded-3xl backdrop-blur-lg border-2 ${
+          theme.mode === "light" ? "bg-white/20 border-white/40" : "bg-gray-900/30 border-gray-200/30"
+        } shadow-2xl`}
+      >
         <h3
-          className={`text-lg md:text-4xl font-semibold ${theme.text} drop-shadow-md opacity-90`}
+          className={`text-lg md:text-4xl font-bold ${theme.text} drop-shadow-md opacity-90`}
         >
           One App. Every Issue. No Hassle
         </h3>
