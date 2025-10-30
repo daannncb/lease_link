@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.34.0",
+    "@radix-ui/themes": "^3.2.1",
     "@supabase/supabase-js": "^2.77.0",
     "browser-image-compression": "^2.0.2",
     "clerk": "^0.8.3",
