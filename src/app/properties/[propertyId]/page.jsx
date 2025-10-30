@@ -50,13 +50,14 @@ export default async function PropertyPage({ params }) {
         <h1 className="text-2xl font-bold border-b">PROPERTY VIEW:</h1>
         <PropertyView propertyId={propertyId} />
         <GetRepairsListProperties propertyId={propertyId} />
-        <h1 className="text-2xl font-bold border-b">ADD NEW REPAIR:</h1>
+        <h1 className="text-4xl font-bold border-b">ADD NEW REPAIR:</h1>
         <RepairForm
+          className="text-4xl md-4 font-bold"
           roleId={roleId}
           propertyAddress={propertyAddress}
           tenantName={tenantName}
         />
-        <ImagePage className="border-color #5f6b66 shadow-md h-64 w-64" />
+        <ImagePage className="border-color #5f6b66 shadow-md h-24 w-24" />
       </div>
       <div>
         {/* <GetRepairsListLandlord propertyId={propertyId} /> */}
