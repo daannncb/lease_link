@@ -4,8 +4,10 @@ import Image from "next/image";
 import { useRef, useState, useTransition } from "react";
 import { uploadImage } from "./storage";
 import { convertBlobUrlToFile } from "@/utils/blob";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function ImagePage() {
+  const supabase = createClientComponentClient();
   const [imageUrls, setImageUrls] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
   const [isPending, startTransition] = useTransition();
