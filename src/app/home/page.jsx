@@ -24,23 +24,40 @@ export default async function Home() {
   if (isTenant == null) {
     const landlordId = dbId;
 
-    return (
-      <div>
-        <h1>IS LANDLORD</h1>
-        <Link href={`/user/${landlordId}/properties`}>
-          <button>View Properties</button>
-        </Link>
-      </div>
-    );
-  } else {
-    const propertyId = isTenant.tenant_id;
-    return (
-      <div>
-        <h1>IS TENANT</h1>
+   return (
+  <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-(--color-beige) dark:bg-(--color-sage-green) transition-colors duration-500 relative overflow-hidden">
+  
+    <div className="absolute inset-0 bg-linear-to-br from-(--color-sage-green)/20 to-(--color-beige)/20 dark:from-(--color-beige)/15 dark:to-(--color-sage-green)/15 backdrop-blur-3xl pointer-events-none" />
+
+    <div className="relative z-10 text-center p-12 rounded-3xl shadow-2xl bg-white/30 dark:bg-(--color-sage-green)/30 backdrop-blur-xl border border-white/30 max-w-lg w-full transition-all duration-500 hover:shadow-3xl">
+      <h1 className="text-5xl font-extrabold mb-6 text-(--color-sage-green) dark:text-(--color-beige) drop-shadow-lg">
+        IS LANDLORD
+      </h1>
+      <Link href={`/user/${landlordId}/properties`}>
+        <button className="px-8 py-4 rounded-xl bg-(--color-sage-green) text-(--color-beige) font-semibold shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
+          View Properties
+        </button>
+      </Link>
+    </div>
+  </div>
+);
+} else {
+  const propertyId = isTenant.tenant_id;
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-(--color-beige) dark:bg-(--color-sage-green) transition-colors duration-500 relative overflow-hidden">
+      <div className="absolute inset-0 bg-linear-to-br from-(--color-sage-green)/20 to-(--color-beige)/20 dark:from-(--color-beige)/15 dark:to-(--color-sage-green)/15 backdrop-blur-3xl pointer-events-none" />
+
+      <div className="relative z-10 text-center p-12 rounded-3xl shadow-2xl bg-white/30 dark:bg-(--color-sage-green)/30 backdrop-blur-xl border border-white/30 max-w-lg w-full transition-all duration-500 hover:shadow-3xl">
+        <h1 className="text-5xl font-extrabold mb-6 text-(--color-sage-green) dark:text-(--color-beige) drop-shadow-lg">
+          IS TENANT
+        </h1>
         <Link href={`/properties/${propertyId}`}>
-          <button>View Repairs</button>
+          <button className="px-8 py-4 rounded-xl bg-(--color-sage-green) text-(--color-beige) font-semibold shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
+            View Repairs
+          </button>
         </Link>
       </div>
-    );
-  }
+    </div>
+  );
+}
 }
