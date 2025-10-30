@@ -1,6 +1,9 @@
 import { db } from "@/utils/dbConnection";
+import { currentUser } from "@clerk/nextjs/dist/types/server";
 
 export default async function CreateProfile() {
+  const user = await currentUser();
+
   const res = await db.query(
     `SELECT properties.id, properties.address_line1, properties.address_line2, properties.city, properties.postcode, properties.country
     FROM properties
