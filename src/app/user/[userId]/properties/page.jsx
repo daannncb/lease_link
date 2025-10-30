@@ -19,6 +19,7 @@ export default async function LandlordPropertiesView({ params }) {
     redirect("/unauthorized");
   }
 
+  // I decided to use ORDER BY Desc here so the newest property will be on top.
   const res = await db.query(
     `
     SELECT 

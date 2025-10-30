@@ -1,4 +1,4 @@
-import LandlordPropertiesView from "../user/[userId]/properties/page";
+import LandlordPropertiesView from "@/user/[userId]/properties/page";
 import { db } from "@/utils/dbConnection";
 
 export default async function CreateProfile() {
