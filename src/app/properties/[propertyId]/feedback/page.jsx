@@ -7,14 +7,14 @@ export default async function FeedbackPage({ params }) {
   //   `SELECT * FROM feedback JOIN roles on feedback.role_id = roles.id WHERE roles.id = (SELECT id FROM roles WHERE roles.property_id = $1 AND roles.landlord_id IS NOT NULL)`,
   //   [propertyId]
   // );
-// I made changes here because I think we need to select needed fields only
+  // I made changes here because I think we need to select needed fields only
   const res = await db.query(
-  `SELECT feedback.id, feedback.comment, feedback.voting
+    `SELECT feedback.id, feedback.comment, feedback.voting
    FROM feedback
    JOIN roles ON feedback.role_id = roles.id
    WHERE roles.property_id = $1 AND roles.landlord_id IS NOT NULL`,
-  [propertyId]
-);
+    [propertyId]
+  );
 
   const feedbackData = res.rows;
   console.log(feedbackData);
@@ -27,7 +27,7 @@ export default async function FeedbackPage({ params }) {
 
   return (
     <div>
-      <h1>hello</h1>
+      <h1 className="text-2xl font-bold">Hello</h1>
       {feedbackData.map((feedback) => {
         return (
           <div key={feedback.id}>
