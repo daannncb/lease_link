@@ -8,7 +8,7 @@ export default function StoredImageRenderer() {
     .from("HugeBarginBucket")
     //////////////////////
     //! this needs to be a dynamic route, OR we store the supabase URL for this image in the repairs table at point of upload in the imageUploader.js component
-    .getPublicUrl("uploads/56fd1a47-ec9f-4176-b47c-55c4c700634f.svg");
+    .getPublicUrl("uploads/e2d4b675-4dcf-41ef-9e6d-e4df7b5eff8e.jpg");
   //////////////////////
 
   console.log("ImageRenderer:", data.publicUrl);
